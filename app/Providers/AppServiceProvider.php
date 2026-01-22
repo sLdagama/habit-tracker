@@ -27,8 +27,19 @@ class AppServiceProvider extends ServiceProvider
 
     private function configureUrls(): void
     {
+        // Se estiver em produção ou staging
         if ($this->app->environment(['production', 'staging'])) {
-            URL::forceScheme('https');
+            
+            // Força o Laravel a usar a URL definida no APP_URL do .env/Docker
+            $url = config('app.url');
+            if ($url) {
+                URL::forceRootUrl($url);
+            }
+
+            // Só força HTTPS se a sua URL de produção realmente usar HTTPS
+            if (str_contains(config('app.url') ?? '', 'https://')) {
+                URL::forceScheme('https');
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 services:
-    # App Habit Tracker (Puxando do Docker Hub)
+    # App Habit Tracker
     laravel.test:
         image: 'sleumas/habit-tracker:latest'
         extra_hosts:
@@ -10,6 +10,12 @@ services:
             LARAVEL_SAIL: 1
             APP_KEY: 'base64:u3m3vX8v9M0Lp5nBvR6T6Y7U8I9O0P1A2B3C4D5E6F7=' 
             APP_DEBUG: 'true'
+            APP_URL: 'http://localhost:8080'
+            ASSET_URL: 'http://localhost:8080'
+            CACHE_STORE: 'file'
+            SESSION_DRIVER: 'file'
+            
+            # Configurações de Banco de Dados
             DB_CONNECTION: mysql
             DB_HOST: mysql
             DB_PORT: 3306

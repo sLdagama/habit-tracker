@@ -10,12 +10,14 @@ class HabitLogFactory extends Factory
 {
     public function definition(): array
     {
+        // Uma data aleatória entre hoje e 30 dias atrás usando PHP puro
+        $randomTimestamp = mt_rand(strtotime("-30 days"), time());
+        $randomDate = date('Y-m-d', $randomTimestamp);
+
         return [
-            // Deixamos como factory padrão, mas o Seeder irá sobrescrever
             'user_id' => User::factory(),
             'habit_id' => Habit::factory(),
-            // Apenas gera uma data; a unicidade será tratada no Seeder
-            'completed_at' => $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d'),
+            'completed_at' => $randomDate,
         ];
     }
 }

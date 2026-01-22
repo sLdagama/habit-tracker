@@ -23,11 +23,11 @@ class HabitFactory extends Factory
         ];
 
         return [
-            // Garante que o usuário exista
+            // PHP Puro: Pega um ID de usuário ou cria um novo
             'user_id' => User::first()?->id ?? User::factory(),
             
-            // Usamos o $this->faker que já vem injetado na Factory
-            'name' => $this->faker->unique()->randomElement($habits),
+            // PHP Puro: Sorteia um índice aleatório do array sem usar Faker
+            'name' => $habits[array_rand($habits)],
         ];
     }
 }
