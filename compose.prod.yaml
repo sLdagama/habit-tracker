@@ -1,14 +1,14 @@
 services:
-    # O seu App de hábitos (Puxando do seu Docker Hub)
+    # App Habit Tracker (Puxando do Docker Hub)
     laravel.test:
         image: 'sleumas/habit-tracker:latest'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
-            - '8080:80' # Acesse via localhost:8080
+            - '8080:80' 
         environment:
             LARAVEL_SAIL: 1
-            APP_KEY: 'base64:u3m3vX8v9M0Lp5nBvR6T6Y7U8I9O0P1A2B3C4D5E6F7=' # Chave padrão para o app ligar
+            APP_KEY: 'base64:u3m3vX8v9M0Lp5nBvR6T6Y7U8I9O0P1A2B3C4D5E6F7=' 
             APP_DEBUG: 'true'
             DB_CONNECTION: mysql
             DB_HOST: mysql
@@ -19,13 +19,12 @@ services:
         networks:
             - sail
         depends_on:
-            - mysql
+            mysql:
+                condition: service_healthy
 
-    # O Banco de Dados
+    # Banco de Dados MySQL
     mysql:
         image: 'mysql:8.4'
-        ports:
-            - '3306:3306'
         environment:
             MYSQL_ROOT_PASSWORD: 'password'
             MYSQL_ROOT_HOST: '%'
@@ -34,7 +33,7 @@ services:
             MYSQL_PASSWORD: 'password'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'sail-mysql-prod:/var/lib/mysql'
+            - 'habit-tracker-db-data:/var/lib/mysql'
         networks:
             - sail
         healthcheck:
@@ -47,5 +46,5 @@ networks:
         driver: bridge
 
 volumes:
-    sail-mysql-prod:
+    habit-tracker-db-data:
         driver: local
