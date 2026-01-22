@@ -1,11 +1,11 @@
 # --- ESTÁGIO 1: Instalar dependências do PHP (Composer) ---
-FROM composer:latest as vendor
+FROM composer:latest AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
 
 # --- ESTÁGIO 2: Imagem Final ---
-FROM php:8.2-apache
+FROM php:8.4-apache
 
 # Dependências do sistema
 RUN apt-get update && apt-get install -y \
@@ -15,25 +15,29 @@ RUN apt-get update && apt-get install -y \
 # Extensões PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# COPIAR O COMPOSER PARA O ESTÁGIO FINAL (Correção do erro)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Ativar Apache Rewrite
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
-# Copiar apenas o código fonte (ignorando o que não precisa)
+# Copiar apenas o código fonte (O .dockerignore vai filtrar o que não deve ir)
 COPY . .
 
 # Trazer a pasta vendor do estágio anterior
 COPY --from=vendor /app/vendor ./vendor
 
-# Gerar o autoload do composer agora com o código
+# Gerar o autoload do composer agora com o código real
 RUN composer dump-autoload --optimize --no-dev
 
 # Permissões (Crucial para o Laravel não dar erro 500)
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Ajustar o Apache para a pasta /public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+# Ajustar o Apache para a pasta /public (Formato corrigido)
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 EXPOSE 80
