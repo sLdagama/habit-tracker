@@ -2,18 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Habit>
- */
 class HabitFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         $habits = [
@@ -21,11 +14,17 @@ class HabitFactory extends Factory
             'Meditar por 15 minutos',
             'Fazer exercícios físicos',
             'Beber 2 litros de água',
+            'Estudar Programação',
+            'Caminhada matinal',
+            'Comer uma fruta',
+            'Dormir 8 horas'
         ];
 
         return [
-            'user_id' => 1,
-            'name' => $this->faker->unique()->randomElement($habits),
+            // Em vez de 1 fixo, tenta pegar o primeiro usuário ou criar um
+            'user_id' => User::first()?->id ?? User::factory(),
+            // Usamos shuffle e shift para garantir unicidade sem erro de "null"
+            'name' => fake()->unique()->randomElement($habits),
         ];
     }
 }
