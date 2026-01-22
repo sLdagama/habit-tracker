@@ -17,14 +17,17 @@ class HabitFactory extends Factory
             'Estudar Programação',
             'Caminhada matinal',
             'Comer uma fruta',
-            'Dormir 8 horas'
+            'Dormir 8 horas',
+            'Praticar Inglês',
+            'Organizar a mesa'
         ];
 
         return [
-            // Em vez de 1 fixo, tenta pegar o primeiro usuário ou criar um
+            // Garante que o usuário exista
             'user_id' => User::first()?->id ?? User::factory(),
-            // Usamos shuffle e shift para garantir unicidade sem erro de "null"
-            'name' => fake()->unique()->randomElement($habits),
+            
+            // Usamos o $this->faker que já vem injetado na Factory
+            'name' => $this->faker->unique()->randomElement($habits),
         ];
     }
 }
