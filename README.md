@@ -12,7 +12,7 @@ Para testar o projeto sem precisar clonar todo o código-fonte ou configurar o P
 Baixe o arquivo [**compose.prod.yaml**](./compose.prod.yaml) deste repositório e salve-o em uma pasta no seu computador.
 
 > **Dica:** Se preferir via terminal, você pode baixar direto usando:
-> `curl -O https://raw.githubusercontent.com/seu-usuario/habit-tracker/main/compose.prod.yaml`
+> `curl -O https://raw.githubusercontent.com/sLdagama/habit-tracker/main/compose.prod.yaml`
 
 ### 2. Suba o sistema
 Abra o terminal na pasta onde salvou o arquivo e execute:
