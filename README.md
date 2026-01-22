@@ -26,3 +26,13 @@ docker compose -f compose.prod.yaml exec laravel.test php artisan migrate:fresh 
 
 3. Acesso
 O sistema estará disponível em: http://localhost:8080
+
+4.
+⚠️ Solução de Problemas (Windows)
+Se ao rodar o comando você receber um erro de conexão (error during connect ou pipe/docker_engine), siga estes passos:
+
+Abra o Docker Desktop: Certifique-se de que a "baleia" está verde e o status é Running.
+
+Permissão de Administrador: Feche seu terminal (PowerShell ou CMD) e abra-o novamente clicando com o botão direito e selecionando "Executar como Administrador".
+
+Verifique a conexão: Digite docker ps. Se aparecer uma lista (mesmo que vazia), o Docker está pronto para uso.
