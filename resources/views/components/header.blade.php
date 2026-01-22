@@ -39,7 +39,7 @@
         </div>
       @endguest
 
-      <a class="habit-btn habit-shadow-lg p-2" href="https://github.com/combizera/habit-tracker-ytb">
+      <a class="habit-btn habit-shadow-lg p-2" href="https://github.com/sLdagama/habit-tracker">
         <x-icons.github />
       </a>
     </div>

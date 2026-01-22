@@ -35,17 +35,22 @@
       </h2>
 
       <article class="flex flex-col items-center gap-4">
-        <x-question question="Tal pergunta">
-          Tal resposta
+        <x-question question="Como o rastreador me ajuda a criar novos hábitos?">
+          O segredo da mudança está na visualização. Ao marcar seu progresso diariamente, você ativa o sistema de recompensa do cérebro, tornando mais difícil querer quebrar a corrente de dias consecutivos.
         </x-question>
-        <x-question question="Tal pergunta">
-          Tal resposta
+
+        <x-question question="Posso acompanhar quantos hábitos eu quiser?">
+          Sim! O sistema permite cadastrar múltiplos hábitos, mas recomendamos focar em 2 ou 3 por vez para garantir que você consiga manter a consistência antes de adicionar novos desafios.
         </x-question>
-        <x-question question="Tal pergunta">
-          Tal resposta
+
+        <x-question question="O que acontece se eu esquecer de marcar um dia?">
+          Não tem problema! O importante é a "regra de nunca falhar dois dias seguidos". Você pode visualizar seu histórico no grid e retomar o ritmo logo no dia seguinte para não perder o foco.
+        </x-question>
+        
+        <x-question question="Como funciona o gráfico de progresso?">
+          Nosso grid de contribuições funciona como o do GitHub: quanto mais você completa seus hábitos, mais preenchido fica o seu histórico anual, permitindo identificar seus meses mais produtivos.
         </x-question>
       </article>
-
     </section>
   </main>
 </x-layout>
