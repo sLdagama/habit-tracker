@@ -1,0 +1,21 @@
+# Ignorar pastas de dependências locais
+node_modules
+vendor
+
+# Ignorar ficheiros de configuração sensíveis (Segurança!)
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.yml
+docker-compose.override.yml
+
+# Ignorar controlo de versão e logs
+.git
+.gitignore
+storage/*.key
+storage/logs/*.log
+
+# Ignorar lixo do sistema e do editor
+.DS_Store
+.vscode
+.idea
